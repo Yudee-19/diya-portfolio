@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   motion,
   useScroll,
@@ -11,8 +11,10 @@ import {
 
 interface StackingSectionProps {
   children: ReactNode;
-  /** 0, 1, 2 … — a higher index renders on top of lower ones (z-index). */
+  /** 0-based position in the stack — a higher index renders on top (z-index). */
   index: number;
+  /** Total number of stacked sections on the page. */
+  total: number;
   className?: string;
 }
 
@@ -43,48 +45,65 @@ function useIsLargeScreen(): boolean {
 export function StackingSection({
   children,
   index,
+  total,
   className = "",
 }: StackingSectionProps) {
-  const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const isLargeScreen = useIsLargeScreen();
 
   // Sticky positioning is pure CSS (`lg:sticky`) and works without JS.
-  // The scale/opacity/radius/shadow transforms are gated: large screen only,
-  // and never when the visitor has asked for reduced motion.
+  // The scale/opacity/radius/shadow/blur transforms are gated: large screen
+  // only, and never when the visitor has asked for reduced motion.
   const stackingEnabled = isLargeScreen && !prefersReducedMotion;
 
-  // Tracker A — this card RECEDING as the next card scrolls over it.
-  //   0 = the card's top edge meets the viewport top (it just became sticky)
-  //   1 = the card's bottom edge meets the viewport top (next card covers it)
-  const { scrollYProgress: recedeProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  // Whole-page scroll progress (0 → 1), read from the document.
+  //
+  // This is deliberately NOT a `useScroll({ target })` on the section: once a
+  // `position: sticky` element pins, its measured rect freezes, so a
+  // target-based progress would stall the moment the card sticks.
+  const { scrollYProgress } = useScroll();
 
-  // Tracker B — this card RISING up onto the stack from below.
-  //   0 = the card's top edge sits at the viewport bottom (still fully below)
-  //   1 = the card's top edge reaches the viewport top (fully risen / sticky)
-  const { scrollYProgress: riseProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "start start"],
-  });
+  // With `total` equal-height (100svh) sections, the page scrolls `total - 1`
+  // viewports. Each section owns one `span` of that 0 → 1 progress range.
+  //
+  // IMPORTANT: every range below must stay within [0, 1]. Motion can promote
+  // scroll-linked transforms to native scroll-driven animations, where the
+  // input range becomes WAAPI keyframe offsets — and offsets outside [0, 1]
+  // throw. The first section never rises and the last never recedes, so those
+  // edge cases use an inert [0, 1] range with a constant output instead.
+  const span = total > 1 ? 1 / (total - 1) : 1;
+  const canRecede = index < total - 1; // last card stays put — nothing covers it
+  const canRise = index > 0; //           first card is on top from the start
 
-  // Bottom-card "settle" as the next card slides over it.
-  const scale = useTransform(recedeProgress, [0, 1], [1, 0.92]);
-  const opacity = useTransform(recedeProgress, [0, 1], [1, 0.6]);
-  const borderRadius = useTransform(recedeProgress, [0, 1], [0, 24]);
+  const recedeRange: [number, number] = canRecede
+    ? [index * span, (index + 1) * span]
+    : [0, 1];
 
-  // Depth: the shadow this card casts onto the section it is covering.
-  // It ramps up while the card slides in, peaks as it overlaps, then eases
-  // back to a lighter resting elevation once the card is locked in place.
-  const shadowAlpha = useTransform(riseProgress, [0, 0.9, 1], [0, 0.32, 0.22]);
+  // RECEDING — the card settles back as the next one slides over it.
+  const scale = useTransform(scrollYProgress, recedeRange, canRecede ? [1, 0.92] : [1, 1]);
+  const opacity = useTransform(scrollYProgress, recedeRange, canRecede ? [1, 0.6] : [1, 1]);
+  const borderRadius = useTransform(scrollYProgress, recedeRange, canRecede ? [0, 24] : [0, 0]);
+
+  // Depth-of-field: the card drifts out of focus as it recedes behind the stack.
+  const blurPx = useTransform(scrollYProgress, recedeRange, canRecede ? [0, 6] : [0, 0]);
+  const filter = useMotionTemplate`blur(${blurPx}px)`;
+
+  // RISING — the shadow this card casts onto the section it is covering.
+  // Ramps up while the card slides in, peaks as it overlaps, then eases back
+  // to a lighter resting elevation once the card is locked in place.
+  const riseRange: [number, number, number] = canRise
+    ? [(index - 1) * span, (index - 1) * span + span * 0.9, index * span]
+    : [0, 0.5, 1];
+  const shadowAlpha = useTransform(
+    scrollYProgress,
+    riseRange,
+    canRise ? [0, 0.32, 0.22] : [0, 0, 0],
+  );
   // Negative Y offset → the shadow falls on the top edge, over the card below.
   const boxShadow = useMotionTemplate`0px -28px 60px -18px rgba(10, 8, 14, ${shadowAlpha})`;
 
   return (
     <div
-      ref={ref}
       className={`lg:sticky lg:top-0 min-h-[100svh] ${className}`}
       style={{ zIndex: index }}
     >
@@ -98,6 +117,7 @@ export function StackingSection({
                 borderTopLeftRadius: borderRadius,
                 borderTopRightRadius: borderRadius,
                 boxShadow,
+                filter,
                 // Scale anchors from the top, so the card "settles" downward.
                 transformOrigin: "center top",
                 // GPU hint — wrapper only, never the children.

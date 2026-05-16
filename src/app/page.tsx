@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <StackingSection index={0}>
+      <StackingSection index={0} total={3}>
       <main className="relative w-full h-[100svh] bg-white overflow-hidden p-3 sm:p-5 flex flex-col">
         <div className="relative w-full flex-1 flex flex-col px-6 py-8 sm:px-10 sm:py-10 md:px-16 md:py-12 font-sans text-black">
           
@@ -50,7 +50,7 @@ export default function Home() {
             {/* Left Text (Top Left) */}
             <div className="flex flex-col items-start justify-start z-10 min-w-0 md:flex-[1.35] pt-1 md:pt-4">
               <ScrapbookItem direction="left" travelDistance={40} tiltSteps={3} duration={0.6} delay={0.1} finalRotation={0}>
-                <h2 className="font-westonia text-[clamp(2.75rem,6.5vw,7rem)] leading-none mb-[-0.5rem] md:mb-[-1rem]  lg:mb-[-3rem]  ml-1 md:ml-3 font-normal text-black drop-shadow-sm whitespace-nowrap">
+                <h2 className="font-westonia text-[clamp(2.75rem,7vw,7rem)] leading-none mb-[-0.5rem] md:mb-[-1rem]  lg:mb-[-3rem]  ml-1 md:ml-3 font-normal text-black drop-shadow-sm whitespace-nowrap tracking-wide">
                   Creative
                 </h2>
               </ScrapbookItem>
@@ -120,12 +120,12 @@ export default function Home() {
       </StackingSection>
 
       {/* Resume Section */}
-      <StackingSection index={1}>
+      <StackingSection index={1} total={3}>
         <ResumeSection />
       </StackingSection>
 
       {/* Key Projects Section */}
-      <StackingSection index={2}>
+      <StackingSection index={2} total={3}>
       <section className="relative w-full overflow-hidden bg-white px-6 py-16 sm:px-10 sm:py-20 md:flex md:h-[100svh] md:flex-col md:justify-center md:py-8 lg:px-16 lg:py-10">
         <div className="relative mx-auto w-full max-w-[1400px]">
 
