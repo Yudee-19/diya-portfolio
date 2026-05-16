@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Great_Vibes, Open_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -18,6 +19,12 @@ const openSans = Open_Sans({
   subsets: ["latin"],
 });
 
+const westonia = localFont({
+  src: "../assets/fonts/westonia/Westonia.ttf",
+  variable: "--font-westonia",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Creative Portfolio",
   description: "Fashion Designer Portfolio",
@@ -31,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${greatVibes.variable} ${openSans.variable} h-full antialiased`}
+      className={`${playfair.variable} ${greatVibes.variable} ${openSans.variable} ${westonia.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

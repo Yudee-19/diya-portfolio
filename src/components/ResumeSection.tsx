@@ -1,6 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import myselfImg from '@/assets/myself.png';
+import myselfImg from '@/assets/myself2.png';
+import illustratorIcon from '@/assets/skills/illustrator.png';
+import photoshopIcon from '@/assets/skills/photoshop.png';
+import indesignIcon from '@/assets/skills/indesign.png';
+import coreldrawIcon from '@/assets/skills/coreldraw.png';
 import { Briefcase, Phone, Send, GraduationCap, Settings, Paintbrush, Lightbulb, Users, Star, Globe } from 'lucide-react';
 import { FaLinkedinIn, FaInstagram } from 'react-icons/fa';
 
@@ -181,11 +185,23 @@ export function ResumeSection() {
                 </span>
                 <h4 className="font-bold text-[0.7rem] uppercase leading-tight">Technical Skills</h4>
               </div>
-              <ul className="text-xs text-gray-700 space-y-1 list-[square] list-outside pl-4 marker:text-black">
-                <li>Adobe Illustrator</li>
-                <li>Photoshop</li>
-                <li>InDesign</li>
-                <li>CorelDraw</li>
+              <ul className="text-xs text-gray-700 space-y-1.5">
+                <li className="flex items-center gap-2">
+                  <Image src={illustratorIcon} alt="" className="w-4 h-4 object-contain shrink-0" />
+                  Adobe Illustrator
+                </li>
+                <li className="flex items-center gap-2">
+                  <Image src={photoshopIcon} alt="" className="w-4 h-4 object-contain shrink-0" />
+                  Photoshop
+                </li>
+                <li className="flex items-center gap-2">
+                  <Image src={indesignIcon} alt="" className="w-4 h-4 object-contain shrink-0" />
+                  InDesign
+                </li>
+                <li className="flex items-center gap-2">
+                  <Image src={coreldrawIcon} alt="" className="w-4 h-4 object-contain shrink-0" />
+                  CorelDraw
+                </li>
               </ul>
             </div>
 

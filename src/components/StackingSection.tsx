@@ -5,6 +5,7 @@ import {
   motion,
   useScroll,
   useTransform,
+  useMotionTemplate,
   useReducedMotion,
 } from "motion/react";
 
@@ -49,22 +50,37 @@ export function StackingSection({
   const isLargeScreen = useIsLargeScreen();
 
   // Sticky positioning is pure CSS (`lg:sticky`) and works without JS.
-  // The scale/opacity/radius transforms are gated: large screen only, and
-  // never when the visitor has asked for reduced motion.
+  // The scale/opacity/radius/shadow transforms are gated: large screen only,
+  // and never when the visitor has asked for reduced motion.
   const stackingEnabled = isLargeScreen && !prefersReducedMotion;
 
-  // scrollYProgress maps 0 → 1 as this section is scrolled past:
-  //   0 = the section's top edge meets the viewport top (it just became sticky)
-  //   1 = the section's bottom edge meets the viewport top (next card covers it)
-  const { scrollYProgress } = useScroll({
+  // Tracker A — this card RECEDING as the next card scrolls over it.
+  //   0 = the card's top edge meets the viewport top (it just became sticky)
+  //   1 = the card's bottom edge meets the viewport top (next card covers it)
+  const { scrollYProgress: recedeProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
+  // Tracker B — this card RISING up onto the stack from below.
+  //   0 = the card's top edge sits at the viewport bottom (still fully below)
+  //   1 = the card's top edge reaches the viewport top (fully risen / sticky)
+  const { scrollYProgress: riseProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start start"],
+  });
+
   // Bottom-card "settle" as the next card slides over it.
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.6]);
-  const borderRadius = useTransform(scrollYProgress, [0, 1], [0, 24]);
+  const scale = useTransform(recedeProgress, [0, 1], [1, 0.92]);
+  const opacity = useTransform(recedeProgress, [0, 1], [1, 0.6]);
+  const borderRadius = useTransform(recedeProgress, [0, 1], [0, 24]);
+
+  // Depth: the shadow this card casts onto the section it is covering.
+  // It ramps up while the card slides in, peaks as it overlaps, then eases
+  // back to a lighter resting elevation once the card is locked in place.
+  const shadowAlpha = useTransform(riseProgress, [0, 0.9, 1], [0, 0.32, 0.22]);
+  // Negative Y offset → the shadow falls on the top edge, over the card below.
+  const boxShadow = useMotionTemplate`0px -28px 60px -18px rgba(10, 8, 14, ${shadowAlpha})`;
 
   return (
     <div
@@ -81,6 +97,7 @@ export function StackingSection({
                 opacity,
                 borderTopLeftRadius: borderRadius,
                 borderTopRightRadius: borderRadius,
+                boxShadow,
                 // Scale anchors from the top, so the card "settles" downward.
                 transformOrigin: "center top",
                 // GPU hint — wrapper only, never the children.

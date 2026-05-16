@@ -22,7 +22,7 @@ import internshipCover from "@/assets/projects-cover/internship.jpg";
 
 export default function Home() {
   const projects = [
-    { label: "Visual Communication", photo: visualComCover, strip: strip1, stripSide: "left" as const, stripRotation: -9, cardRotation: -3, direction: "top" as const },
+    { label: "Fashion Communication", photo: visualComCover, strip: strip1, stripSide: "left" as const, stripRotation: -9, cardRotation: -3, direction: "top" as const },
     { label: "Design Development", photo: designDevCover, strip: strip2, stripSide: "right" as const, stripRotation: 8, cardRotation: 2, direction: "top" as const },
     { label: "Branding", photo: brandingCover, strip: strip3, stripSide: "right" as const, stripRotation: 6, cardRotation: -2, direction: "top" as const },
     { label: "Editorial Design", photo: editorialCover, strip: strip4, stripSide: "left" as const, stripRotation: -7, cardRotation: 3, direction: "bottom" as const },
@@ -49,8 +49,8 @@ export default function Home() {
             
             {/* Left Text (Top Left) */}
             <div className="flex flex-col items-start justify-start z-10 min-w-0 md:flex-[1.35] pt-1 md:pt-4">
-              <ScrapbookItem direction="left" travelDistance={40} tiltSteps={3} duration={0.6} delay={0.1}>
-                <h2 className="font-great-vibes text-[clamp(2.75rem,6.5vw,7rem)] leading-none mb-[-0.5rem] md:mb-[-1rem] ml-1 md:ml-3 font-normal text-black drop-shadow-sm whitespace-nowrap">
+              <ScrapbookItem direction="left" travelDistance={40} tiltSteps={3} duration={0.6} delay={0.1} finalRotation={0}>
+                <h2 className="font-westonia text-[clamp(2.75rem,6.5vw,7rem)] leading-none mb-[-0.5rem] md:mb-[-1rem]  lg:mb-[-3rem]  ml-1 md:ml-3 font-normal text-black drop-shadow-sm whitespace-nowrap">
                   Creative
                 </h2>
               </ScrapbookItem>
@@ -131,7 +131,7 @@ export default function Home() {
 
           {/* Title — stacked on mobile, centered overlay on desktop */}
           <div className="relative z-30 mb-10 flex justify-center md:pointer-events-none md:absolute md:inset-0 md:mb-0 md:items-center">
-            <ScrapbookItem direction="bottom" travelDistance={30} tiltSteps={3} duration={0.7} maxAngle={8} finalRotation={-2}>
+            <ScrapbookItem direction="bottom" travelDistance={30} tiltSteps={3} duration={0.7} maxAngle={8} finalRotation={0}>
               <h2 className="text-center font-playfair text-5xl font-bold uppercase leading-[0.95] tracking-tight text-[#222220] drop-shadow-sm sm:text-7xl md:text-[3.25rem] lg:text-[4.5rem] xl:text-[5.5rem]">
                 Key Projects
               </h2>
@@ -170,10 +170,10 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 hidden md:block">
             <Image src={wriggle} alt="" unoptimized className="absolute left-[1%] top-[30%] h-auto w-24 -rotate-12 opacity-80" />
             <Image src={starIcon} alt="" unoptimized className="absolute right-[34%] top-[34%] h-auto w-11" />
-            <Image src={star2Icon} alt="" unoptimized className="absolute left-[30%] top-[47%] h-auto w-8" />
+            <Image src={star2Icon} alt="" unoptimized className="absolute left-[27%] top-[36%] h-auto w-8" />
             <Image src={wriggle} alt="" unoptimized className="absolute right-[2%] top-[2%] h-auto w-24 rotate-12 opacity-80" />
             <Image src={starIcon} alt="" unoptimized className="absolute bottom-[8%] left-[31%] h-auto w-9" />
-            <Image src={star2Icon} alt="" unoptimized className="absolute bottom-[33%] right-[6%] h-auto w-9" />
+            <Image src={star2Icon} alt="" unoptimized className="absolute bottom-[38%] right-[4%] h-auto w-9" />
           </div>
 
         </div>
