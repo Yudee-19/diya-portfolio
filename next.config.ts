@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Allow Cloudinary-hosted images (used by next-cloudinary's <CldImage>).
+    remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
+  },
 };
 
 export default nextConfig;
