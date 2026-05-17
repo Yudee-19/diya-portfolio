@@ -1,4 +1,10 @@
+import { pageMetadata } from "@/lib/metadata";
 import { SlideStack } from "@/components/SlideStack";
+
+export const metadata = pageMetadata(
+  "Print Development",
+  "A print development project by Kasturi Pal — pattern and surface design.",
+);
 
 // Cloudinary public IDs: print-development-1 … print-development-4
 const slides = Array.from(

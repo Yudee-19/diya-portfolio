@@ -1,4 +1,10 @@
+import { pageMetadata } from "@/lib/metadata";
 import { SlideStack } from "@/components/SlideStack";
+
+export const metadata = pageMetadata(
+  "Fashion Forecasting",
+  "A fashion forecasting project by Kasturi Pal — trend research and seasonal direction.",
+);
 
 // Cloudinary public IDs: fashion-forecasting-1 … fashion-forecasting-16
 const slides = Array.from(

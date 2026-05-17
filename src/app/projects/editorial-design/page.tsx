@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { ScrapbookItem } from "@/components/ScrapbookAnimation";
@@ -29,6 +30,11 @@ const cards: TopicCard[] = [
   { slug: "layout-designs", title: "Layout Designs", photo: layoutDesignPhoto, direction: "top", rotation: 1.5, delay: 0.2 },
   { slug: "typography", title: "Typography", photo: typographyPhoto, direction: "right", rotation: -1.5, delay: 0.3 },
 ];
+
+export const metadata = pageMetadata(
+  "Editorial Design",
+  "Editorial design work by Kasturi Pal — magazine design, layout design and typography.",
+);
 
 export default function EditorialDesignPage() {
   return (

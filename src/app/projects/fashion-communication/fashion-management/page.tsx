@@ -1,4 +1,10 @@
+import { pageMetadata } from "@/lib/metadata";
 import { SlideStack } from "@/components/SlideStack";
+
+export const metadata = pageMetadata(
+  "Fashion Management",
+  "A fashion management project by Kasturi Pal covering planning, coordination and brand operations.",
+);
 
 // Cloudinary public IDs: fashion-management-1 … fashion-management-24
 const slides = Array.from(

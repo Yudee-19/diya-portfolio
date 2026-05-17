@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { ScrapbookItem } from "@/components/ScrapbookAnimation";
@@ -35,6 +36,11 @@ const cards: TopicCard[] = [
   { slug: "print-development", title: "Print Development", photo: printDevelopmentPhoto, direction: "bottom", rotation: -2, delay: 0.4 },
   { slug: "drapping", title: "Drapping", photo: drappingPhoto, direction: "bottom", rotation: 1.5, delay: 0.5 },
 ];
+
+export const metadata = pageMetadata(
+  "Design Development",
+  "Design development work by Kasturi Pal — graduation project, textile and brand studies, kids wear, print development and draping.",
+);
 
 export default function DesignDevelopmentPage() {
   return (

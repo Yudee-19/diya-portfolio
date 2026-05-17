@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { ScrapbookItem } from "@/components/ScrapbookAnimation";
@@ -33,6 +34,11 @@ const cards: TopicCard[] = [
   { slug: "new-media", title: "New Media", photo: newMediaPhoto, direction: "bottom", rotation: -2, delay: 0.3, position: "lg:left-[27%] lg:top-[47%]" },
   { slug: "fashion-management", title: "Fashion Management", photo: fashionManagementPhoto, direction: "right", rotation: 3, delay: 0.4, position: "lg:left-[74%] lg:top-[50%]" },
 ];
+
+export const metadata = pageMetadata(
+  "Fashion Communication",
+  "Fashion communication projects by Kasturi Pal — fashion marketing, forecasting, new media and management.",
+);
 
 export default function FashionCommunicationPage() {
   return (
