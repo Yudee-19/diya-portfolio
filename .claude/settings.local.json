@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf \"d:/Projects/diya-portfolio/src/app/projects/[slug]\" && echo \"deleted [slug] route\")"
+    ],
+    "additionalDirectories": [
+      "d:\\Projects\\diya-portfolio\\src\\app\\projects\\[slug]"
+    ]
+  }
+}

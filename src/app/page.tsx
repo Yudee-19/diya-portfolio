@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ScrapbookItem } from "@/components/ScrapbookAnimation";
 import { ResumeSection } from "@/components/ResumeSection";
 import { Polaroid } from "@/components/Polaroid";
@@ -22,12 +23,12 @@ import internshipCover from "@/assets/projects-cover/internship.jpg";
 
 export default function Home() {
   const projects = [
-    { label: "Fashion Communication", photo: visualComCover, strip: strip1, stripSide: "left" as const, stripRotation: -9, cardRotation: -3, direction: "top" as const },
-    { label: "Design Development", photo: designDevCover, strip: strip2, stripSide: "right" as const, stripRotation: 8, cardRotation: 2, direction: "top" as const },
-    { label: "Branding", photo: brandingCover, strip: strip3, stripSide: "right" as const, stripRotation: 6, cardRotation: -2, direction: "top" as const },
-    { label: "Editorial Design", photo: editorialCover, strip: strip4, stripSide: "left" as const, stripRotation: -7, cardRotation: 3, direction: "bottom" as const },
-    { label: "Photography", photo: photographyCover, strip: strip5, stripSide: "left" as const, stripRotation: -5, cardRotation: -2, direction: "bottom" as const },
-    { label: "Internship", photo: internshipCover, strip: strip6, stripSide: "right" as const, stripRotation: 9, cardRotation: 2, direction: "bottom" as const },
+    { slug: "fashion-communication", label: "Fashion Communication", photo: visualComCover, strip: strip1, stripSide: "left" as const, stripRotation: -9, cardRotation: -3, direction: "top" as const },
+    { slug: "design-development", label: "Design Development", photo: designDevCover, strip: strip2, stripSide: "right" as const, stripRotation: 8, cardRotation: 2, direction: "top" as const },
+    { slug: "branding", label: "Branding", photo: brandingCover, strip: strip3, stripSide: "right" as const, stripRotation: 6, cardRotation: -2, direction: "top" as const },
+    { slug: "editorial-design", label: "Editorial Design", photo: editorialCover, strip: strip4, stripSide: "left" as const, stripRotation: -7, cardRotation: 3, direction: "bottom" as const },
+    { slug: "photography", label: "Photography", photo: photographyCover, strip: strip5, stripSide: "left" as const, stripRotation: -5, cardRotation: -2, direction: "bottom" as const },
+    { slug: "internship", label: "Internship", photo: internshipCover, strip: strip6, stripSide: "right" as const, stripRotation: 9, cardRotation: 2, direction: "bottom" as const },
   ];
 
   return (
@@ -126,7 +127,7 @@ export default function Home() {
 
       {/* Key Projects Section */}
       <StackingSection index={2} total={3}>
-      <section className="relative w-full overflow-hidden bg-white px-6 py-16 sm:px-10 sm:py-20 md:flex md:h-[100svh] md:flex-col md:justify-center md:py-8 lg:px-16 lg:py-10">
+      <section id="key-projects" className="relative w-full overflow-hidden bg-white px-6 py-16 sm:px-10 sm:py-20 md:flex md:h-[100svh] md:flex-col md:justify-center md:py-8 lg:px-16 lg:py-10">
         <div className="relative mx-auto w-full max-w-[1400px]">
 
           {/* Title — stacked on mobile, centered overlay on desktop */}
@@ -152,15 +153,21 @@ export default function Home() {
                   maxAngle={12}
                   finalRotation={p.cardRotation}
                 >
-                  <Polaroid
-                    className="w-full"
-                    photo={p.photo}
-                    alt={`${p.label} project`}
-                    label={p.label}
-                    strip={p.strip}
-                    stripSide={p.stripSide}
-                    stripRotation={p.stripRotation}
-                  />
+                  <Link
+                    href={`/projects/${p.slug}`}
+                    className="group block w-full cursor-pointer"
+                    aria-label={`${p.label} project`}
+                  >
+                    <Polaroid
+                      className="w-full"
+                      photo={p.photo}
+                      alt={`${p.label} project`}
+                      label={p.label}
+                      strip={p.strip}
+                      stripSide={p.stripSide}
+                      stripRotation={p.stripRotation}
+                    />
+                  </Link>
                 </ScrapbookItem>
               </div>
             ))}
