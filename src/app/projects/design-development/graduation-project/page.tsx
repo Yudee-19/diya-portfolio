@@ -2,7 +2,7 @@ import { SlideStack } from "@/components/SlideStack";
 
 // Cloudinary public IDs: graduation-project-1 … graduation-project-19
 const slides = Array.from(
-    { length: 18 },
+    { length: 19 },
     (_, i) => `graduation-project-${i + 1}`,
 );
 

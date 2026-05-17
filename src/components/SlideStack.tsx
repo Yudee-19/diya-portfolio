@@ -5,9 +5,11 @@ import Link from "next/link";
 import { StackingSection } from "@/components/StackingSection";
 
 interface SlideStackProps {
-  /** Ordered Cloudinary public IDs of the slides. */
-  slides: string[];
-  /** Used for each slide's alt text, e.g. "Fashion Marketing — slide 3". */
+  /** Cloudinary public IDs, one per slide. Use this OR `pdf`. */
+  slides?: string[];
+  /** A single multi-page PDF on Cloudinary, rendered one page per slide. */
+  pdf?: { publicId: string; pages: number };
+  /** Used for each slide's alt text, e.g. "Branding — slide 3". */
   title: string;
   /** Where the fixed back link points. */
   backHref: string;
@@ -16,11 +18,19 @@ interface SlideStackProps {
 /**
  * Renders a sequence of Cloudinary-hosted images as full-viewport sections,
  * each wrapped in a StackingSection so they pin and stack on scroll (lg and
- * up). CldImage auto-serves the best format/quality from Cloudinary's CDN;
- * the slide's white background blends into the section, so `object-contain`
- * shows the whole slide with no visible letterbox.
+ * up). Source is either a list of image public IDs (`slides`) or a single
+ * multi-page PDF (`pdf`) — for a PDF, Cloudinary rasterises each page via the
+ * `pg_N` transformation, so no per-page upload is needed.
  */
-export function SlideStack({ slides, title, backHref }: SlideStackProps) {
+export function SlideStack({ slides, pdf, title, backHref }: SlideStackProps) {
+  // Normalise both inputs to a single list of CldImage configs.
+  const items: { src: string; rawTransformations?: string[] }[] = pdf
+    ? Array.from({ length: pdf.pages }, (_, i) => ({
+        src: pdf.publicId,
+        rawTransformations: [`pg_${i + 1}`],
+      }))
+    : (slides ?? []).map((src) => ({ src }));
+
   return (
     <div className="w-full bg-white">
       {/* Back link — fixed so it stays reachable through the whole stack */}
@@ -31,11 +41,12 @@ export function SlideStack({ slides, title, backHref }: SlideStackProps) {
         ← Back
       </Link>
 
-      {slides.map((id, i) => (
-        <StackingSection key={id} index={i} total={slides.length}>
+      {items.map((item, i) => (
+        <StackingSection key={i} index={i} total={items.length}>
           <div className="relative h-[100svh] w-full bg-white">
             <CldImage
-              src={id}
+              src={item.src}
+              rawTransformations={item.rawTransformations}
               alt={`${title} — slide ${i + 1}`}
               fill
               sizes="100vw"
