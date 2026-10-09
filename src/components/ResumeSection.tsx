@@ -98,10 +98,7 @@ export function ResumeSection() {
                 </div>
 
                 {/* Right Column: Experience */}
-                <div
-                    className="w-full lg:w-1/3 flex flex-col gap-4 overflow-y-auto pr-2"
-                    style={{ scrollbarWidth: "none" }}
-                >
+                <div className="w-full lg:w-1/3 flex flex-col gap-4 overflow-y-auto overscroll-contain pr-2 scrollbar-theme max-h-[60svh] lg:max-h-none lg:self-stretch lg:min-h-0">
                     <div className="flex items-center gap-2 mb-1 sticky top-0 bg-white z-10 py-1">
                         <div className="bg-black text-white p-1.5 rounded-md">
                             <Briefcase size={18} />
@@ -115,21 +112,26 @@ export function ResumeSection() {
                         {/* Timeline Item 1 */}
                         <div className="relative">
                             <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
-                            <h4 className="font-sans font-bold text-sm text-black mb-1">
-                                Rohan Pariyar Studios – Intern
-                            </h4>
+                            <div className="flex items-baseline justify-between gap-2 mb-1">
+                                <h4 className="font-sans font-bold text-sm text-black">
+                                    Ladify – Fashion Designer
+                                </h4>
+                                <span className="font-sans font-bold text-xs text-black shrink-0">
+                                    Present
+                                </span>
+                            </div>
                             <ul className="list-disc pl-4 text-xs text-gray-700 space-y-1 font-sans leading-snug">
                                 <li>
-                                    Contributed to the "I Medici" showcase at
-                                    Victoria Memorial
+                                    Researched market trends and forecasted fashion directions for new designs
                                 </li>
                                 <li>
-                                    Assisted in garment styling, presentation,
-                                    and backstage coordination
+                                    Created mood boards, tech packs, garment designs and product visualizations
                                 </li>
                                 <li>
-                                    Gained exposure to high-end fashion showcase
-                                    production
+                                    Coordinated with tailors, manufacturers and embroidery teams; tracked fabrics and materials
+                                </li>
+                                <li>
+                                    Supervised the Durgapur store, handled client interactions and visual merchandising; developed catalogues and staff uniforms
                                 </li>
                             </ul>
                         </div>
@@ -137,23 +139,23 @@ export function ResumeSection() {
                         {/* Timeline Item 2 */}
                         <div className="relative">
                             <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
-                            <h4 className="font-sans font-bold text-sm text-black mb-1">
-                                ROY Calcutta – Intern
-                            </h4>
+                            <div className="flex items-baseline justify-between gap-2 mb-1">
+                                <h4 className="font-sans font-bold text-sm text-black">
+                                    Rohan Pariyar Studios – Intern
+                                </h4>
+                                <span className="font-sans font-bold text-xs text-black shrink-0">
+                                    1 month
+                                </span>
+                            </div>
                             <ul className="list-disc pl-4 text-xs text-gray-700 space-y-1 font-sans leading-snug">
                                 <li>
-                                    Assisted in the launch of a new collection,
-                                    contributing to styling and shoot
-                                    preparation
+                                    Contributed to the "I Medici" showcase at Victoria Memorial
                                 </li>
                                 <li>
-                                    Worked closely with the jewellry brand{" "}
-                                    <strong>Sawansukha</strong> for coordinated
-                                    styling
+                                    Assisted in garment styling, presentation, and backstage coordination
                                 </li>
                                 <li>
-                                    Supported creative direction for photoshoots
-                                    and brand presentation
+                                    Gained exposure to high-end fashion showcase production
                                 </li>
                             </ul>
                         </div>
@@ -161,22 +163,75 @@ export function ResumeSection() {
                         {/* Timeline Item 3 */}
                         <div className="relative">
                             <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
-                            <h4 className="font-sans font-bold text-sm text-black mb-1">
-                                ICCR, Sutra Foundation – Fashion Show Assistant
-                            </h4>
+                            <div className="flex items-baseline justify-between gap-2 mb-1">
+                                <h4 className="font-sans font-bold text-sm text-black">
+                                    ROY Calcutta – Intern
+                                </h4>
+                                <span className="font-sans font-bold text-xs text-black shrink-0">
+                                    2 months
+                                </span>
+                            </div>
                             <ul className="list-disc pl-4 text-xs text-gray-700 space-y-1 font-sans leading-snug">
                                 <li>
-                                    Supported end-to-end execution of fashion
-                                    shows, including backstage coordination and
-                                    model management
+                                    Assisted in the launch of a new collection, contributing to styling and shoot preparation
                                 </li>
                                 <li>
-                                    Assisted in styling and garment handling
-                                    during live showcases
+                                    Worked closely with the jewellery brand{" "}
+                                    <strong>Sawansukha</strong> for coordinated styling
                                 </li>
                                 <li>
-                                    Collaborated with designers and production
-                                    teams to ensure smooth event flow
+                                    Supported creative direction for photoshoots and brand presentation
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Timeline Item 4 */}
+                        <div className="relative">
+                            <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
+                            <div className="flex items-baseline justify-between gap-2 mb-1">
+                                <h4 className="font-sans font-bold text-sm text-black">
+                                    ICCR, Sutra Foundation – Fashion Show Assistant
+                                </h4>
+                                <span className="font-sans font-bold text-xs text-black shrink-0">
+                                    1 month
+                                </span>
+                            </div>
+                            <ul className="list-disc pl-4 text-xs text-gray-700 space-y-1 font-sans leading-snug">
+                                <li>
+                                    Supported end-to-end execution of fashion shows, including backstage coordination and model management
+                                </li>
+                                <li>
+                                    Assisted in styling and garment handling during live showcases
+                                </li>
+                                <li>
+                                    Collaborated with designers and production teams to ensure smooth event flow
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Timeline Item 5 */}
+                        <div className="relative">
+                            <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
+                            <div className="flex items-baseline justify-between gap-2 mb-1">
+                                <h4 className="font-sans font-bold text-sm text-black">
+                                    SNU Unifest Fashion Show, Swatantra – Garment Production Coordinator
+                                </h4>
+                                <span className="font-sans font-bold text-xs text-black shrink-0">
+                                    3 months
+                                </span>
+                            </div>
+                            <ul className="list-disc pl-4 text-xs text-gray-700 space-y-1 font-sans leading-snug">
+                                <li>
+                                    Coordinated model recruitment and backstage management
+                                </li>
+                                <li>
+                                    Assisted in garment design and collection development
+                                </li>
+                                <li>
+                                    Coordinated with tailors throughout the garment manufacturing process
+                                </li>
+                                <li>
+                                    Monitored production progress and quality of finished garments
                                 </li>
                             </ul>
                         </div>
