@@ -165,6 +165,33 @@ export function ResumeSection() {
                             <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
                             <div className="flex items-baseline justify-between gap-2 mb-1">
                                 <h4 className="font-sans font-bold text-sm text-black">
+                                    SNU Unifest Fashion Show, Swatantra – Garment Production Coordinator
+                                </h4>
+                                <span className="font-sans font-bold text-xs text-black shrink-0">
+                                    3 months
+                                </span>
+                            </div>
+                            <ul className="list-disc pl-4 text-xs text-gray-700 space-y-1 font-sans leading-snug">
+                                <li>
+                                    Coordinated model recruitment and backstage management
+                                </li>
+                                <li>
+                                    Assisted in garment design and collection development
+                                </li>
+                                <li>
+                                    Coordinated with tailors throughout the garment manufacturing process
+                                </li>
+                                <li>
+                                    Monitored production progress and quality of finished garments
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Timeline Item 4 */}
+                        <div className="relative">
+                            <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
+                            <div className="flex items-baseline justify-between gap-2 mb-1">
+                                <h4 className="font-sans font-bold text-sm text-black">
                                     ROY Calcutta – Intern
                                 </h4>
                                 <span className="font-sans font-bold text-xs text-black shrink-0">
@@ -185,7 +212,7 @@ export function ResumeSection() {
                             </ul>
                         </div>
 
-                        {/* Timeline Item 4 */}
+                        {/* Timeline Item 5 */}
                         <div className="relative">
                             <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
                             <div className="flex items-baseline justify-between gap-2 mb-1">
@@ -205,33 +232,6 @@ export function ResumeSection() {
                                 </li>
                                 <li>
                                     Collaborated with designers and production teams to ensure smooth event flow
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Timeline Item 5 */}
-                        <div className="relative">
-                            <div className="absolute w-2.5 h-2.5 bg-black rounded-full -left-[1.35rem] top-1"></div>
-                            <div className="flex items-baseline justify-between gap-2 mb-1">
-                                <h4 className="font-sans font-bold text-sm text-black">
-                                    SNU Unifest Fashion Show, Swatantra – Garment Production Coordinator
-                                </h4>
-                                <span className="font-sans font-bold text-xs text-black shrink-0">
-                                    3 months
-                                </span>
-                            </div>
-                            <ul className="list-disc pl-4 text-xs text-gray-700 space-y-1 font-sans leading-snug">
-                                <li>
-                                    Coordinated model recruitment and backstage management
-                                </li>
-                                <li>
-                                    Assisted in garment design and collection development
-                                </li>
-                                <li>
-                                    Coordinated with tailors throughout the garment manufacturing process
-                                </li>
-                                <li>
-                                    Monitored production progress and quality of finished garments
                                 </li>
                             </ul>
                         </div>
